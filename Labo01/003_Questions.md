@@ -21,19 +21,19 @@ now as we are doing it outside the labo hours, it takes only 5 secs. When we wer
       the machine?
       
     ```
-    TODO
+    9:14 (and here it is 10:14). So 1h of difference, because the machine is configured in UTC.
     ```
 
     * What's the name of the hypervisor?
     
     ```
-    TODO
+    We are uncertain, but some sources explain we use a modified Xen, and others explain we use a Nitro Hypervisor.
     ```
 
     * How much free space does the disk have?
     
     ```
-    TODO
+    10GB
     ```
 
 
@@ -42,7 +42,8 @@ now as we are doing it outside the labo hours, it takes only 5 secs. When we wer
   instance, record 5 round-trip times.
 
 ```
-TODO
+At first, the ping does nothing as the DMZ only accepts connection from port 22 (SSH). If we wanted to ping it, we would need to allow connection from the port used for pings. We believe that we do not have access to those resources and cannot change it as it would change it for everyone.
+
 ```
 
 * Determine the IP address seen by the operating system in the EC2
@@ -52,5 +53,5 @@ TODO
   with the machine?
 
 ```
-TODO
+It's a private address (10.x.x.x) whereas the ping done earlier was done using a public IP address. It shouldn't be accessible but as we first connect to the ssh server (that has a public IP address), and then navigate inside the subnet with this private IP address.
 ```
