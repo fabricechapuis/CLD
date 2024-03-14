@@ -3,14 +3,15 @@
   instance?
 
 ```
-TODO
+smallest: t2.nano
+x2iedn.metal
 ```
 
 * How long did it take for the new instance to get into the _running_
   state?
 
 ```
-TODO
+now as we are doing it outside the labo hours, it takes only 5 secs. When we were on labo's hours, it took more than one minute.
 ```
 
 * Using the commands to explore the machine listed earlier, respond to
