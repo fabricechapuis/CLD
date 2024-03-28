@@ -167,6 +167,11 @@ aws elbv2 create-target-group --name "TG-DEVOPSTEAM04" --protocol "HTTP" --port 
         }
     ]
 }
+
+[INPUT]
+aws elbv2 register-targets --target-group-arn "arn:aws:elasticloadbalancing:eu-west-3:709024702237:targetgroup/TG-DEVOPSTEAM04/a5118a499ec2b2d2" --targets "Id=i-0136e53ee54579b1d,Port=8080" "Id=i-005ac5d0bcc27525a,Port=8080"
+[OUTPUT]
+#Nothing
 ```
 
 
