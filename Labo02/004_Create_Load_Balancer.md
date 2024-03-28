@@ -43,12 +43,36 @@ instances.
 |Interval|10 seconds|
 |Success codes|200|
 
-```bash
+```PowerShell
 [INPUT]
-
+aws elbv2 create-target-group --name "TG-DEVOPSTEAM04" --protocol "HTTP" --port 8080 --vpc-id "vpc-03d46c285a2af77ba" --health-check-protocol "HTTP" --protocol-version "HTTP1" --ip-address-type "ipv4" --target-type "instance" --health-check-path "/" --health-check-port "traffic-port" --healthy-threshold-count 2 --unhealthy-threshold-count 2 --health-check-timeout-seconds 5 --health-check-interval-seconds 10 --matcher "HttpCode=200"
 
 [OUTPUT]
-
+{
+    "TargetGroups": [
+        {
+            "TargetGroupArn": "arn:aws:elasticloadbalancing:eu-west-3:709024702237:targetgroup/TG-DEVOPSTEAM04/a5118a499ec2b2d2",
+            "TargetGroupName": "TG-DEVOPSTEAM04",
+            "Protocol": "HTTP",
+            "Port": 8080,
+            "VpcId": "vpc-03d46c285a2af77ba",
+            "HealthCheckProtocol": "HTTP",
+            "HealthCheckPort": "traffic-port",
+            "HealthCheckEnabled": true,
+            "HealthCheckIntervalSeconds": 10,
+            "HealthCheckTimeoutSeconds": 5,
+            "HealthyThresholdCount": 2,
+            "UnhealthyThresholdCount": 2,
+            "HealthCheckPath": "/",
+            "Matcher": {
+                "HttpCode": "200"
+            },
+            "TargetType": "instance",
+            "ProtocolVersion": "HTTP1",
+            "IpAddressType": "ipv4"
+        }
+    ]
+}
 ```
 
 
