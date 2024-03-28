@@ -29,7 +29,7 @@ Please refer to https://docs.bitnami.com/ for more details.
 
 ```bash
 [INPUT]
-mariadb -u root -p # TODO Why root and not "user" ??? 
+mariadb -u root -p
 
 show databases;
 
