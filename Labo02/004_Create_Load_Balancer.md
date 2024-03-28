@@ -18,9 +18,81 @@ instances.
 
 ```bash
 [INPUT]
-
+aws ec2 create-security-group --description "Allow access to ELB" --group-name "SG-DEVOPSTEAM04-LB" --vpc-id vpc-03d46c285a2af77ba --tag-specifications "ResourceType=security-group,Tags=[{Key=Name,Value=SG-DEVOPSTEAM04-LB}]"
 
 [OUTPUT]
+{
+    "GroupId": "sg-02803043caaa4a38f",
+    "Tags": [
+        {
+            "Key": "Name",
+            "Value": "SG-DEVOPSTEAM04-LB"
+        }
+    ]
+}
+
+[INPUT]
+aws ec2 authorize-security-group-ingress --group-id sg-02803043caaa4a38f  --protocol tcp --port 8080 --cidr 10.0.4.0/28
+
+[OUTPUT]
+{
+    "Return": true,
+    "SecurityGroupRules": [
+        {
+            "SecurityGroupRuleId": "sgr-04ae1ccf98f440fa3",
+            "GroupId": "sg-02803043caaa4a38f",
+            "GroupOwnerId": "709024702237",
+            "IsEgress": false,
+            "IpProtocol": "tcp",
+            "FromPort": 8080,
+            "ToPort": 8080,
+            "CidrIpv4": "10.0.4.0/28"
+        }
+    ]
+}
+
+
+[INPUT]
+aws ec2 authorize-security-group-ingress --group-id sg-02803043caaa4a38f  --protocol tcp --port 8080 --cidr 10.0.4.128/28
+
+[OUTPUT]
+{
+    "Return": true,
+    "SecurityGroupRules": [
+        {
+            "SecurityGroupRuleId": "sgr-030dbdb6766a02e66",
+            "GroupId": "sg-02803043caaa4a38f",
+            "GroupOwnerId": "709024702237",
+            "IsEgress": false,
+            "IpProtocol": "tcp",
+            "FromPort": 8080,
+            "ToPort": 8080,
+            "CidrIpv4": "10.0.4.128/28"
+        }
+    ]
+}
+
+
+[INPUT]
+aws ec2 authorize-security-group-ingress --group-id sg-02803043caaa4a38f  --protocol tcp --port 8080 --cidr 10.0.0.0/28
+
+[OUTPUT]
+{
+    "Return": true,
+    "SecurityGroupRules": [
+        {
+            "SecurityGroupRuleId": "sgr-0f97c3393a8f4bfba",
+            "GroupId": "sg-02803043caaa4a38f",
+            "GroupOwnerId": "709024702237",
+            "IsEgress": false,
+            "IpProtocol": "tcp",
+            "FromPort": 8080,
+            "ToPort": 8080,
+            "CidrIpv4": "10.0.0.0/28"
+        }
+    ]
+}
+
 
 ```
 
@@ -61,7 +133,7 @@ instances.
 |Key|Value|
 |:--|:--|
 |Type|Application Load Balancer|
-|Name|ELB-DEVOPSTEAM99|
+|Name|ELB-DEVOPSTEAM04|
 |Scheme|Internal|
 |Ip Address type|IPv4|
 |VPC|Refer to the infra schema|
@@ -74,9 +146,43 @@ field not mentioned at its default value):
 
 ```bash
 [INPUT]
-
+aws elbv2 create-load-balancer --name "ELB-DEVOPSTEAM04" --scheme "internal" --ip-address-type "ipv4" --security-groups sg-02803043caaa4a38f --subnets "subnet-0bf85ea7e03762d3c" "subnet-0ae5546979aecf3f2" --tags "Key=VpcId,Value=vpc-03d46c285a2af77ba"
 
 [OUTPUT]
+{
+    "LoadBalancers": [
+        {
+            "LoadBalancerArn": "arn:aws:elasticloadbalancing:eu-west-3:709024702237:loadbalancer/app/ELB-DEVOPSTEAM04/5810daca78497bd5",
+            "DNSName": "internal-ELB-DEVOPSTEAM04-637783655.eu-west-3.elb.amazonaws.com",
+            "CanonicalHostedZoneId": "Z3Q77PNBQS71R4",
+            "CreatedTime": "2024-03-28T12:35:03.410000+00:00",
+            "LoadBalancerName": "ELB-DEVOPSTEAM04",
+            "Scheme": "internal",
+            "VpcId": "vpc-03d46c285a2af77ba",
+            "State": {
+                "Code": "provisioning"
+            },
+            "Type": "application",
+            "AvailabilityZones": [
+                {
+                    "ZoneName": "eu-west-3b",
+                    "SubnetId": "subnet-0ae5546979aecf3f2",
+                    "LoadBalancerAddresses": []
+                },
+                {
+                    "ZoneName": "eu-west-3a",
+                    "SubnetId": "subnet-0bf85ea7e03762d3c",
+                    "LoadBalancerAddresses": []
+                }
+            ],
+            "SecurityGroups": [
+                "sg-02803043caaa4a38f"
+            ],
+            "IpAddressType": "ipv4"
+        }
+    ]
+}
+
 
 ```
 
