@@ -14,7 +14,7 @@
 * 1 RDS Database instance - started
 * 1 Elastic Load Balancer - started
 
-## Create a new launch configuration. 
+## Create a new launch configuration
 
 |Key|Value|
 |:--|:--|
@@ -33,6 +33,7 @@
 ```
 [INPUT]
 //cli command
+// Done from GUI
 
 [OUTPUT]
 ```
@@ -69,6 +70,7 @@
 ```
 [INPUT]
 //cli command
+// Done from GUI
 
 [OUTPUT]
 ```
@@ -81,11 +83,17 @@ Test ssh and web access.
 
 ```
 [INPUT]
+// TUNNEL
+ssh devopsteam04@15.188.43.46 -i ~/.ssh/cld/CLD_KEY_DMZ_DEVOPSTEAM04.pem -L 2222:10.0.4.139:22 -L 8080:internal-ELB-DEVOPSTEAM04-1835091662.eu-west-3.elb.amazonaws.com:8080
 //ssh login
-
+ssh devopsteam04@localhost -i ~/.ssh/cld/CLD_KEY_DRUPAL_DEVOPSTEAM04.pem -p 2222
 [OUTPUT]
+devopsteam04@ip-10-0-0-5:~$
 ```
 
 ```
 //screen shot, web access (login)
 ```
+![ssh login](./img/ssh-login.png)
+
+![browser](./img/browser.png)
