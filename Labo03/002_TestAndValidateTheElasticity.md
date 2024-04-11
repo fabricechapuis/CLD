@@ -19,6 +19,8 @@ htop
 //copy the part representing vCPus, RAM and swap usage
 ```
 
+![htop](./img/htop.png)
+
 ### Stress your instance
 
 ```
@@ -30,6 +32,8 @@ htop
 //tip : use two ssh sessions....
 ```
 
+![htop stressed](./img/htop-stress.png)
+
 * (Scale-IN) Observe the autoscaling effect on your infa
 
 
@@ -38,29 +42,35 @@ htop
 //Screen shot from cloud watch metric
 ```
 [Sample](./img/CLD_AWS_CLOUDWATCH_CPU_METRICS.PNG)
+![cloud watch metric](./img/cloudwatch-metric.png)
 
 ```
-//TODO screenshot of ec2 instances list (running state)
+//screenshot of ec2 instances list (running state)
 ```
 [Sample](./img/CLD_AWS_EC2_LIST.PNG)
+![ec2 instances list](./img/instances.png)
 
 ```
-//TODO Validate that the various instances have been distributed between the two available az.
+//Validate that the various instances have been distributed between the two available az.
 [INPUT]
 //aws cli command
 
 [OUTPUT]
 ```
 
-```
-//TODO screenshot of the activity history
-```
-[Sample](./img/CLD_AWS_ASG_ACTIVITY_HISTORY.PNG)
+![instace availability zones](./img/instances.png)
 
 ```
-//TODO screenshot of the cloud watch alarm target tracking
+//screenshot of the activity history
+```
+[Sample](./img/CLD_AWS_ASG_ACTIVITY_HISTORY.PNG)
+![activity history](./img/activity-history.png)
+
+```
+//screenshot of the cloud watch alarm target tracking
 ```
 [Sample](./img/CLD_AWS_CLOUDWATCH_ALARMHIGH_STATS.PNG)
+![alarm target tracking](./img/asgrp-metric.png)
 
 
 * (Scale-OUT) As soon as all 4 instances have started, end stress on the main machine.
@@ -68,16 +78,19 @@ htop
 [Change the default cooldown period](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-scaling-cooldowns.html)
 
 ```
-//TODO screenshot from cloud watch metric
+//screenshot from cloud watch metric
+```
+![alarm target tracking low](./img/asgrp-metric-low.png)
+
+```
+//screenshot of ec2 instances list (terminated state)
+// Deduced from activity history, instanced were already deleted from the list
 ```
 
 ```
-//TODO screenshot of ec2 instances list (terminated state)
+//screenshot of the activity history
 ```
-
-```
-//TODO screenshot of the activity history
-```
+![full activity history](./img/full-activity-history.png)
 
 ## Release Cloud resources
 
