@@ -157,17 +157,17 @@ Deliverables:
 **Done further up**
 
   ```
-  //TODO Java class files
+  // Java class files
   ```
 
   ```
-  //TODO web.xml
+  // web.xml
   ```
 
   ```
-  //TODO appengine-web.xml
+  // appengine-web.xml
   ```
 
   ```
-  //TODO index.jsp
+  // index.jsp
   ```
