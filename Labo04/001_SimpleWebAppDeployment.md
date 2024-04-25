@@ -56,7 +56,7 @@ Create a simple web application as follows.
    `HelloAppEngine` file. What does the code do?
 
    ```
-   //TODO
+   It gives a simple HTML page serving as an "hello world" at .../hello. Most of the content is about the configurations / properties of the program.
    ```
 
 6. Note the annotation starting with `@WebServlet` in front of the
@@ -66,14 +66,14 @@ Create a simple web application as follows.
    `web.xml`. What information does it contain? And what is its use ?
 
    ```
-   //TODO
+   This web.xml configuration specifies index.jsp as the welcome file for the web application, meaning it's the default page displayed when users access the root URL.
    ```
 
 8. Inspect the Google App Engine configuration file
    `appengine-web.xml` in `webapp/WEB-INF`. What information does it contain?
 
    ```
-   //TODO
+   The appengine-web.xml file contains configuration settings specific to deploying and running web-app on Google App Engine. 
    ```
 
 9. Edit the Google App Engine configuration file as follows:
@@ -85,7 +85,7 @@ Create a simple web application as follows.
     `index.jsp` spotted in `web.xml`. What is its use ?
 
     ```
-    //TODO
+    It's a template engine allowing for HTML generation based on flow control, variable values and more.
     ```
 
 ---
