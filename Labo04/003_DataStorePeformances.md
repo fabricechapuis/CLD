@@ -86,16 +86,33 @@ Deliverables:
 
   ```
   
-  Cloud Firestore Read Operations : // TODO
-  Cloud Firestore API Calls	: // TODO
-  Cloud Firestore Stored Data	: // TODO
-  Data Sent to Cloud Firestore API : // TODO
-  Data Received from Cloud Firestore API : // TODO
-  Cloud Firestore Entity Writes : // TODO
-  Cloud Firestore Index Write Ops : // TODO
-  Cloud Firestore Network Egress : // TODO
+  Cloud Firestore Read Operations :
+  This quota refers to the number of read operations allowed on your Firestore database. Each time data is read from Firestore, it counts against this quota.
+
+  Cloud Firestore API Calls	:
+  This quota represents the total number of API calls made to the Firestore service. It includes reads, writes, deletes, and any other interactions with Firestore via its API.
+
+  Cloud Firestore Stored Data	:
+  This quota indicates the amount of data stored within your Firestore database. It's measured in terms of storage space used by your documents and collections.
+
+  Data Sent to Cloud Firestore API :
+  This quota denotes the amount of data sent to the Firestore API from your application. It includes data sent during write operations and other interactions with the Firestore service.
+
+  Data Received from Cloud Firestore API :
+  This quota represents the amount of data received from the Firestore API to your application. It includes data retrieved during read operations and responses from API calls.
+
+  Cloud Firestore Entity Writes :
+  This quota specifies the number of write operations allowed on your Firestore database. It encompasses creating, updating, and deleting documents and collections.
+
+  Cloud Firestore Index Write Ops :
+  This quota concerns the number of operations related to writing indexes within Firestore. Indexes are crucial for efficient querying of your Firestore data.
+
+  Cloud Firestore Network Egress :
+  This quota relates to the amount of data transferred out of your Firestore database over the network. It includes data sent from Firestore to your application.
+
   Standard rate
-  Cloud Storage Network (Egress) - Americas and EMEA : // TODO
+  Cloud Storage Network (Egress) - Americas and EMEA :
+  This quota pertains to the amount of data transferred out of Cloud Storage in the Americas and EMEA regions. It includes any data retrieved from Cloud Storage located in these regions.
   ```
 
 - Let's suppose you become suspicious that the algorithm for the automatic scaling of
