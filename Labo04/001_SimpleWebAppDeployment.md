@@ -154,18 +154,20 @@ Deliverables:
   you see in the **Java class files**, **web.xml**,
   **appengine-web.xml** and **index.jsp** files in a few sentences.
 
+**Done further up**
+
   ```
-  //TODO Java class files
+  // Java class files
   ```
 
   ```
-  //TODO web.xml
+  // web.xml
   ```
 
   ```
-  //TODO appengine-web.xml
+  // appengine-web.xml
   ```
 
   ```
-  //TODO index.jsp
+  // index.jsp
   ```
