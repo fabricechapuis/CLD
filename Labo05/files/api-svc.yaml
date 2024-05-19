@@ -3,7 +3,7 @@ kind: Service
 metadata:
   labels:
     component: api
-  name: api
+  name: api-svc
 spec:
   ports:
   - port: 8081
@@ -13,4 +13,3 @@ spec:
     app: todo
     component: api
   type: ClusterIP
-# TODO Erreur ici pour que ça fonctionne

@@ -73,12 +73,53 @@ Document any difficulties you faced and how you overcame them. Copy the object d
 
 ```yaml
 # frontend-svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: frontend
+  name: frontend-svc
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8080
+    name: frontend
+    protocol: TCP
+  selector:
+    component: frontend
 ```
 
 Take a screenshot of the cluster details from the GKE console. Copy the output of the `kubectl describe` command to describe your load balancer once completely initialized.
 
 > // TODO
 
+![Screenshot1](./img/p2-1.png)<br>
+![Screenshot2](./img/p2-2.png)<br>
+![Screenshot3](./img/p2-3.png)<br>
+
 ```````
-// TODO object descriptions
+PS> kubectl describe service/frontend-svc
+Name:                     frontend-svc
+Namespace:                default
+Labels:                   component=frontend
+Annotations:              cloud.google.com/neg: {"ingress":true}
+Selector:                 component=frontend
+Type:                     LoadBalancer
+IP Family Policy:         SingleStack
+IP Families:              IPv4
+IP:                       10.119.230.18
+IPs:                      10.119.230.18
+LoadBalancer Ingress:     34.38.1.105
+Port:                     frontend  80/TCP
+TargetPort:               8080/TCP
+NodePort:                 frontend  32264/TCP
+Endpoints:                10.44.2.10:8080
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:
+  Type    Reason                Age    From                Message
+  ----    ------                ----   ----                -------
+  Normal  EnsuringLoadBalancer  7m51s  service-controller  Ensuring load balancer
+  Normal  EnsuredLoadBalancer   7m9s   service-controller  Ensured load balancer
 ```````
