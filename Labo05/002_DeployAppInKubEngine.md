@@ -65,20 +65,111 @@ Now you can verify if the ToDo application is working correctly.
 
 Document any difficulties you faced and how you overcame them. Copy the object descriptions into the lab report (if they are unchanged from the previous task just say so).
 
-> // TODO
-
-```````
-// TODO object descriptions
-```````
+> // Had to add the 'selector:' field, in order to expose the component "frontend".
+```
+❯ kubectl describe pod/frontend
+Name:             frontend
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             gke-gke-cluster-1-default-pool-568febae-jf7h/10.132.0.7
+Start Time:       Sun, 19 May 2024 13:38:15 +0200
+Labels:           app=todo
+                  component=frontend
+Annotations:      <none>
+Status:           Running
+IP:               10.76.1.5
+IPs:
+  IP:  10.76.1.5
+Containers:
+  frontend:
+    Container ID:   containerd://8a687fc79388a3c3fa73659394c0d61e7571103e326bbf0178677ec5acc1d6ef
+    Image:          icclabcna/ccp2-k8s-todo-frontend
+    Image ID:       docker.io/icclabcna/ccp2-k8s-todo-frontend@sha256:5892b8f75a4dd3aa9d9cf527f8796a7638dba574ea8e6beef49360a3c67bbb44
+    Port:           8080/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Sun, 19 May 2024 13:38:47 +0200
+    Ready:          True
+    Restart Count:  0
+    Environment:
+      API_ENDPOINT_URL:  http://api-svc:8081
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-tsnzt (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  kube-api-access-tsnzt:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  10m   default-scheduler  Successfully assigned default/frontend to gke-gke-cluster-1-default-pool-568febae-jf7h
+  Normal  Pulling    10m   kubelet            Pulling image "icclabcna/ccp2-k8s-todo-frontend"
+  Normal  Pulled     10m   kubelet            Successfully pulled image "icclabcna/ccp2-k8s-todo-frontend" in 29.981s (29.983s including waiting)
+  Normal  Created    10m   kubelet            Created container frontend
+  Normal  Started    10m   kubelet            Started container frontend
+```
 
 ```yaml
 # frontend-svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: frontend
+  name: frontend-svc
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8080
+    name: frontend
+    protocol: TCP
+  selector:
+    component: frontend
 ```
 
 Take a screenshot of the cluster details from the GKE console. Copy the output of the `kubectl describe` command to describe your load balancer once completely initialized.
 
-> // TODO
+> ![Screenshot1](./img/p2-1.png)<br>
+> ![Screenshot2](./img/p2-2.png)<br>
+> ![Screenshot3](./img/p2-3.png)<br>
 
-```````
-// TODO object descriptions
-```````
+```
+PS> kubectl describe service/frontend-svc
+Name:                     frontend-svc
+Namespace:                default
+Labels:                   component=frontend
+Annotations:              cloud.google.com/neg: {"ingress":true}
+Selector:                 component=frontend
+Type:                     LoadBalancer
+IP Family Policy:         SingleStack
+IP Families:              IPv4
+IP:                       10.119.230.18
+IPs:                      10.119.230.18
+LoadBalancer Ingress:     34.38.1.105
+Port:                     frontend  80/TCP
+TargetPort:               8080/TCP
+NodePort:                 frontend  32264/TCP
+Endpoints:                10.44.2.10:8080
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:
+  Type    Reason                Age    From                Message
+  ----    ------                ----   ----                -------
+  Normal  EnsuringLoadBalancer  7m51s  service-controller  Ensuring load balancer
+  Normal  EnsuredLoadBalancer   7m9s   service-controller  Ensured load balancer
+```
