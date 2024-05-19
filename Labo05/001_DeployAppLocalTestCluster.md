@@ -175,18 +175,122 @@ You should see the application's main page titled __Todos V2__ and you should be
 
 Document any difficulties you faced and how you overcame them. Copy the object descriptions into the lab report.
 
-> // TODO
+```
+❯ kubectl describe service/api-svc
+Name:              api-svc
+Namespace:         default
+Labels:            component=api
+Annotations:       <none>
+Selector:          app=todo,component=api
+Type:              ClusterIP
+IP Family Policy:  SingleStack
+IP Families:       IPv4
+IP:                10.96.123.113
+IPs:               10.96.123.113
+Port:              api  8081/TCP
+TargetPort:        8081/TCP
+Endpoints:         10.244.0.6:8081
+Session Affinity:  None
+Events:            <none>
+```
 
-```````
-// TODO object descriptions
-```````
+
+```
+❯ kubectl describe pod/frontend
+Name:             frontend
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             minikube/192.168.49.2
+Start Time:       Thu, 02 May 2024 16:17:55 +0200
+Labels:           app=todo
+                  component=frontend
+Annotations:      <none>
+Status:           Running
+IP:               10.244.0.7
+IPs:
+  IP:  10.244.0.7
+Containers:
+  frontend:
+    Container ID:   docker://37febea737887d9db14ead6744d045dd535419d1198b8b080ea9d4ecf8bdc4df
+    Image:          icclabcna/ccp2-k8s-todo-frontend
+    Image ID:       docker-pullable://icclabcna/ccp2-k8s-todo-frontend@sha256:5892b8f75a4dd3aa9d9cf527f8796a7638dba574ea8e6beef49360a3c67bbb44
+    Port:           8080/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Thu, 02 May 2024 16:18:12 +0200
+    Ready:          True
+    Restart Count:  0
+    Environment:
+      API_ENDPOINT_URL:  http://10.96.123.113:8081
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-8mq5m (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True
+  Initialized                 True
+  Ready                       True
+  ContainersReady             True
+  PodScheduled                True
+Volumes:
+  kube-api-access-8mq5m:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age    From               Message
+  ----    ------     ----   ----               -------
+  Normal  Scheduled  7m30s  default-scheduler  Successfully assigned default/frontend to minikube
+  Normal  Pulling    7m29s  kubelet            Pulling image "icclabcna/ccp2-k8s-todo-frontend"
+  Normal  Pulled     7m14s  kubelet            Successfully pulled image "icclabcna/ccp2-k8s-todo-frontend" in 15.335s (15.335s including waiting). Image size: 746900794 bytes.
+  Normal  Created    7m13s  kubelet            Created container frontend
+  Normal  Started    7m13s  kubelet            Started container frontend
+```
 
 ```yaml
 # api-svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: api
+  name: api-svc
+spec:
+  ports:
+  - port: 8081
+    targetPort: 8081
+    name: api
+  selector:
+    app: todo
+    component: api
+  type: ClusterIP
 ```
 
 ```yaml
 # frontend-pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: frontend
+  labels:
+    component: frontend
+    app: todo
+spec:
+  containers:
+  - name: frontend
+    image: icclabcna/ccp2-k8s-todo-frontend
+    ports:
+    - containerPort: 8080
+    env:
+    - name: API_ENDPOINT_URL
+      value: http://10.96.123.113:8081
+
 ```
 
 > [!TIP]

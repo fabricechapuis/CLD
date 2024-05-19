@@ -43,30 +43,41 @@ $ kubectl get pods --watch
 You may also use `kubectl get all` repeatedly to see a list of all resources.  You should also verify if the application stays available by continuously reloading your browser window.
 
   * What happens if you delete a Frontend or API Pod? How long does it take for the system to react?
-    > Kubernetes creates it again, to keep the number of pods to 2.
-    > It reacts almost instantly, but the creation can take some time.
+    > As soon as one of the pods from a `Deployment` starts getting deleted (not even waiting for it to be done), another pod starts getting created. The overall process of recreating a deleted pod took ~5s even though deleting the pod took a bit more time.
     
   * What happens when you delete the Redis Pod?
 
-    > It is instantly deleted and is created again. But during this time, since the DB is not up anymore, we can't story any data inside. Then, when created, we have to delete the api pods for them to connect to the new DB. Otherwise we can't store anything either.
+    > It does the same as the other pods but after restarting a new pod, all the previous data is lost and the app doesn't work until you restart the api pods (most likely because the api pods do not attempt to reconnect to the database after a failure, or every so often, not on miss).
     
   * How can you change the number of instances temporarily to 3? Hint: look for scaling in the deployment documentation
 
-    > kubectl scale deployment {component_name} --replicas=3
+    > `kubectl scale deployment {deployment_name} --replicas=3`
     
   * What autoscaling features are available? Which metrics are used?
 
-    > // TODO
+    > With `kubectl autoscale deployment/nginx-deployment --min=10 --max=15 --cpu-percent=80` (from the doc), we can autoscale the amount of instance running in our ReplicaSet providing a maximum and a minimum. The autoscaling will be based on the cpu utilization. Reading the `--help`, this command doesn't seem to allow other metrics and if no `--cpu-percent` is provided, it uses a `default policy` that is not disclosed (might be changeable else where). Another method would be to create an object with the same method as until now: creating a yaml file (and do `kubectl apply hpy.yaml`. File's content is under "Deliverables").
+
     
   * How can you update a component? (see "Updating a Deployment" in the deployment documentation)
 
-    > Modify a file and then execute the command: kubectl edit {object}.
+    > Modify a file and then execute the command: `kubectl edit {component}`. We can see the current information concerning the `Deployment` and change them on the fly and the `Deployment` will do a rollout, scaling the old ReplicaSet to 0 instances and creating a new one with the new provided yaml config.
 
 ## Subtask 3.3 - Put autoscaling in place and load-test it
 
 On the GKE cluster deploy autoscaling on the Frontend with a target CPU utilization of 30% and number of replicas between 1 and 4. 
 
 Load-test using Vegeta (500 requests should be enough).
+
+> The following commands will be used to stress-test our TODO app
+>
+>```zsh
+>$ echo "GET http://{External IP}" > todo.list
+>
+>$ vegeta attack -duration=50s -rate=10 -targets=todo.list | tee results.bin | vegeta report
+>
+>$ cat results.bin | vegeta plot --title="TODO" > results.html
+>```
+
 
 > [!NOTE]
 >
