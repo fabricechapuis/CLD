@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Task 3 - Add and exercise resilience
 
 By now you should have understood the general principle of configuring, running and accessing applications in Kubernetes. However, the above application has no support for resilience. If a container (resp. Pod) dies, it stops working. Next, we add some resilience to the application.
