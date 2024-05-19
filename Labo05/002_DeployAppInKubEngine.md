@@ -65,11 +65,7 @@ Now you can verify if the ToDo application is working correctly.
 
 Document any difficulties you faced and how you overcame them. Copy the object descriptions into the lab report (if they are unchanged from the previous task just say so).
 
-> // TODO
-
-```````
-// TODO object descriptions
-```````
+> // Had to add the 'selector:' field, in order to expose the component "frontend".
 
 ```yaml
 # frontend-svc.yaml
@@ -92,11 +88,9 @@ spec:
 
 Take a screenshot of the cluster details from the GKE console. Copy the output of the `kubectl describe` command to describe your load balancer once completely initialized.
 
-> // TODO
-
-![Screenshot1](./img/p2-1.png)<br>
-![Screenshot2](./img/p2-2.png)<br>
-![Screenshot3](./img/p2-3.png)<br>
+> ![Screenshot1](./img/p2-1.png)<br>
+> ![Screenshot2](./img/p2-2.png)<br>
+> ![Screenshot3](./img/p2-3.png)<br>
 
 ```````
 PS> kubectl describe service/frontend-svc
