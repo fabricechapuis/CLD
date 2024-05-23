@@ -1,1 +1,1 @@
-gce_instance ansible_ssh_host=34.65.93.32 ansible_ssh_user=alt ansible_ssh_private_key_file=../credentials/labgce-ssh-key
+gce_instance ansible_ssh_host=34.65.93.32
