@@ -238,31 +238,42 @@ Deliverables:
 * Explain the usage of each provided file and its contents by directly adding comments in the file as needed (we must ensure that you understood what you have done). In the file `variables.tf` fill the missing documentation parts and link to the online documentation. Copy the modified files to the report.
 
 ```
-//TODO
+backend.tf
+main.tf
+outputs.tf
+terraform.tfvars
+variables.tf
 ```
 
 * Explain what the files created by Terraform are used for.
-
 ```
-//TODO
+The files created by Terraform in the `terraform` directory serve different purposes:
+
+1. `.terraform.lock.hcl`: This file stores dependencies, meaning the providers needed and the versions used.
+
+2. `.terraform`: This directory contains the configuration file describing the resources Terraform has to manage.
+
+These files are essential for managing the infrastructure using Terraform.
 ```
 
 * Where is the Terraform state saved? Imagine you are working in a team and the other team members want to use Terraform, too, to manage the cloud infrastructure. Do you see any problems with this? Explain.
+```
+In the file "terraform.tfstate". Yes, because the state is stored locally. We would need to store it in the cloud, or an area available for every authorized person. To do this, we should not write "local" in the backend.tf file.
+```
+
+* What happens if you reapply the configuration (1) without changing `main.tf` (2) with a change in `main.tf`? Do you see any changes in Terraform's output? Why? (3) Can you think of examples where Terraform needs to delete parts of the infrastructure to be able to reconfigure it?
 
 ```
-//TODO
-```
-
-* What happens if you reapply the configuration (1) without changing `main.tf` (2) with a change in `main.tf`? Do you see any changes in Terraform's output? Why? Can you think of examples where Terraform needs to delete parts of the infrastructure to be able to reconfigure it?
-
-```
-//TODO
+1. Terraform will compare the current state with the configuration in main.tf. If there are no changes, Terraform will indicate that no changes are necessary.
+2. Terraform will detect the differences between the current state and the new configuration. It will then plan and apply the necessary changes to reach the desired state defined in main.tf.
+3. Yes, when we change the instance type of a VM. Terraform will need to delete it to recreate
+one with the right state, since it will do whatever it can to reach the desired state.
 ```
 
 * Explain what you would need to do to manage multiple instances.
 
 ```
-//TODO
+count or for_each argument. It will allow us to create multiple instances with the same configuration.
 ```
 
 * Take a screenshot of the Google Cloud Console showing your Google Compute instance and put it in the report.
