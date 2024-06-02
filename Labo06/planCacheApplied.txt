@@ -1,0 +1,27 @@
+❯ terraform apply -input=false .terraform/plan.cache
+google_compute_firewall.http: Creating...
+google_compute_firewall.ssh: Creating...
+google_compute_instance.default: Creating...
+google_compute_firewall.http: Still creating... [10s elapsed]
+google_compute_firewall.ssh: Still creating... [10s elapsed]
+google_compute_firewall.ssh: Creation complete after 12s [id=projects/labgce-424214/global/firewalls/allow-ssh]
+google_compute_firewall.http: Creation complete after 12s [id=projects/labgce-424214/global/firewalls/allow-http]
+╷
+│ Error: Error creating instance: googleapi: Error 400: Invalid value for field 'resource.name': 'Alain Terrieur'. Must be a match of regex '(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?)', invalid
+│
+│   with google_compute_instance.default,
+│   on main.tf line 7, in resource "google_compute_instance" "default":
+│    7: resource "google_compute_instance" "default" {
+│
+╵
+
+❯ terraform apply -input=false .terraform/plan2.cache
+google_compute_instance.default: Creating...
+google_compute_instance.default: Still creating... [10s elapsed]
+google_compute_instance.default: Creation complete after 16s [id=projects/labgce-424214/zones/europe-west6-a/instances/alain-terrieur]
+
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+gce_instance_ip = "34.65.93.32"

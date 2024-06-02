@@ -29,6 +29,13 @@ ansible webservers -m ping
 //TODO
 [OUTPUT]
 ```json
+gce_instance | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
 ```
 
 The output should be the same as before.
@@ -114,16 +121,33 @@ curl <yourIP>
 
 [OUTPUT]
 ```html
+<html>
+    <head>
+    <title>Welcome to ansible</title> </head>
+    <body>
+    <h1>nginx, configured by Ansible</h1>
+    <p>If you can see this, Ansible successfully installed nginx.</p>
+    <p>Ansible managed</p>
+    <p>Some facts Ansible gathered about this machine:
+    <table>
+        <tr><td>OS family:</td><td>Debian</td></tr>
+        <tr><td>Distribution:</td><td>Ubuntu</td></tr>
+        <tr><td>Distribution version:</td><td>20.04</td></tr>
+    </table>
+    </p>
+    </body>
+</html>
 ```
 
 Deliverables:
 
 - Explain the usage of each file and its contents, add comments to the different blocks if needed (we must ensure that you understood what you have done). Link to the online documentation. Link to the online documentation.
 
-//TODO
 |FileName|Explanation|
 |:--|:--|
-||||
+| web.yml | Describes a series of tasks done on the instances to which it connects with the give [webservers] info in hosts |
+| files/nginx.conf| NGINX configuration used for the instances |
+| templates/index.html.j2 | Template file used to generate html with NGINX |
 
 
 * Deliver a folder "ansible" with your configuration.
