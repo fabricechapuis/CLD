@@ -1,3 +1,10 @@
+#  https://developer.hashicorp.com/terraform/tutorials/aws-get-started/aws-variables
+#  https://developer.hashicorp.com/terraform/language/values/variables
+
+# Input variables let you customize aspects of Terraform modules without altering
+# the module's own source code. This functionality allows you to share modules across
+# different Terraform configurations, making your module composable and reusable.
+
 variable "gcp_project_id" {
   description = "Project's ID in Google cloud"
   type        = string
