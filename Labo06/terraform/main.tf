@@ -1,3 +1,7 @@
+# This file is a configuration file used to manage and define infrastructure objects (here on google cloud).
+# We give the required inputs, and the different objects will be created after a "terraform apply".
+# Here, we define an VM instance, and a firewall.
+
 provider "google" {
   project     = var.gcp_project_id
   region      = "europe-west6-a"
